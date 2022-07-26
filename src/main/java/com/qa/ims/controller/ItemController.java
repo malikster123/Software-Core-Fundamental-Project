@@ -1,0 +1,34 @@
+package com.qa.ims.controller;
+
+import java.util.List;
+
+import com.qa.ims.persistence.domain.Item;
+
+public class ItemController implements CrudController<Item> {
+
+	@Override
+	public List<Item> readAll() {
+		System.out.println("Hello");
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item create() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item update() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}
