@@ -22,7 +22,7 @@ public class ItemDAO implements Dao<Item> {
     public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
     	long id = resultSet.getLong("id");
 		String itemName = resultSet.getString("item_name");
-		float price = resultSet.getFloat("price");
+		double price = resultSet.getDouble("price");
 		return new Item(id, itemName, price);
     }
 
@@ -61,7 +61,7 @@ public class ItemDAO implements Dao<Item> {
     public Item create(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO item (item_name, price) VALUES (?, ?)");) {
+						.prepareStatement("INSERT INTO items (item_name, price) VALUES (?, ?)");) {
 			statement.setString(1, item.getItem_name());
 			statement.setDouble(2, item.getPrice());
 			statement.executeUpdate();
@@ -93,7 +93,7 @@ public class ItemDAO implements Dao<Item> {
     public Item update(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-				.prepareStatement("UPDATE item SET item_name = ?, price = ? WHERE id = ?");) {
+				.prepareStatement("UPDATE items SET item_name = ?, price = ? WHERE id = ?");) {
 			statement.setString(1, item.getItem_name());
 			statement.setDouble(2, item.getPrice());
 			statement.setLong(3, item.getId());
@@ -109,7 +109,7 @@ public class ItemDAO implements Dao<Item> {
     @Override
     public int delete(long id) {
     	try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM item WHERE id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM items WHERE id = ?");) {
 			statement.setLong(1, id);
 			return statement.executeUpdate();
 		} catch (Exception e) {
