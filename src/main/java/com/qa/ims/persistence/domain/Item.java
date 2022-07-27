@@ -6,12 +6,10 @@ public class Item {
 
 	private Long id;
 	private String item_name;
-//	private String item_category;
 	private double price;
 	
 	public Item(Long id, String item_name, double price) {
 		this.setItem_name(item_name);
-//		this.setItem_category(item_category);
 		this.setPrice(price);
 	}
 	
