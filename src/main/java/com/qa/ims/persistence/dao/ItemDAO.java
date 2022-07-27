@@ -1,6 +1,7 @@
 package com.qa.ims.persistence.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,6 +18,15 @@ import com.qa.ims.utils.DBUtils;
 public class ItemDAO implements Dao<Item> {
 	
 	public static final Logger LOGGER = LogManager.getLogger();
+	
+	@Override
+	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
+		Long id = resultSet.getLong("id");
+		String item_name = resultSet.getString("item_name");
+		double price = resultSet.getDouble("price");
+		return new Item(id, item_name, price);
+	}
+
 
 	@Override
 	public List<Item> readAll() {
@@ -43,7 +53,17 @@ public class ItemDAO implements Dao<Item> {
 
 	@Override
 	public Item create(Item t) {
-		// TODO Auto-generated method stub
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("INSERT INTO items(item_name, price) VALUES (?, ?)");) {
+			statement.setString(1, t.getFirstName());
+			statement.setString(2, t.getSurname());
+			statement.executeUpdate();
+			return readLatest();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return null;
 	}
 
