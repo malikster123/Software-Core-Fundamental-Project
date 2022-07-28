@@ -90,17 +90,18 @@ public class OrderDAO implements Dao<Order> {
 	@Override
 	public Order update(Order t) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("UPDATE orders SET WHERE id = ?, customer_id = ?");) {
-			statement.setLong(1, t.getId());
-			statement.setLong(2, t.getCustomer_id());
-			statement.executeUpdate();
-			return read(t.getId());
-		} catch (Exception e) {
-			LOGGER.debug(e);
-			LOGGER.error(e.getMessage());
-		}
-		return null;
+				 PreparedStatement statement = connection
+			                .prepareStatement("UPDATE orders SET id = ?, customer_id = ? WHERE id = ?");) {
+			            statement.setLong(1, t.getId());
+			            statement.setLong(2, t.getCustomer_id());
+			            statement.setLong(3, t.getId());
+			            statement.executeUpdate();
+			            return read(t.getId());
+			        } catch (Exception e) {
+			            LOGGER.debug(e);
+			            LOGGER.error(e.getMessage());
+			        }
+			        return null;
 	}
 
 	@Override
