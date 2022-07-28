@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Order {
 	
 	private Long id;
+	private Customer fkcustomer_id;
 	private Long customer_id;
 	
 
@@ -34,12 +35,23 @@ public class Order {
 		this.customer_id = customer_id;
 	}
 
-
+	
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", customer_id=" + customer_id + "]";
+		return "Order [id=" + id + ", fkcustomer_id=" + fkcustomer_id + ", customer_id=" + customer_id + "]";
 	}
 
+
+	public Customer getFkcustomer_id() {
+		return fkcustomer_id;
+	}
+
+
+	public void setFkcustomer_id(Customer fkcustomer_id) {
+		this.fkcustomer_id = fkcustomer_id;
+	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -48,6 +60,7 @@ public class Order {
 		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
 		return result;
 	}
+
 
 
 	@Override
@@ -61,7 +74,9 @@ public class Order {
 		Order other = (Order) obj;
 		return Objects.equals(customer_id, other.customer_id) && Objects.equals(id, other.id);
 	}
-	
+
+
+
 	
 	
 	
