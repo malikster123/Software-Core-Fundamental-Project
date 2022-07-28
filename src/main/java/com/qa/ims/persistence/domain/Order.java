@@ -5,16 +5,16 @@ import java.util.Objects;
 public class Order {
 	
 	private Long id;
-	private String customer_id;
+	private Long customer_id;
 	
 
-	public Order(String customer_id) {
+	public Order(Long customer_id) {
 		super();
 		this.customer_id = customer_id;
 	}
 	
 	
-	public Order(Long id, String customer_id) {
+	public Order(Long id, Long customer_id) {
 		super();
 		this.id = id;
 		this.customer_id = customer_id;
@@ -27,10 +27,10 @@ public class Order {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCustomer_id() {
+	public Long getCustomer_id() {
 		return customer_id;
 	}
-	public void setCustomer_id(String customer_id) {
+	public void setCustomer_id(Long customer_id) {
 		this.customer_id = customer_id;
 	}
 
@@ -43,7 +43,10 @@ public class Order {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(customer_id, id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((customer_id == null) ? 0 : customer_id.hashCode());
+		return result;
 	}
 
 

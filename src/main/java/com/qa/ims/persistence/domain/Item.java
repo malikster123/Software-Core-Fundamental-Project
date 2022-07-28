@@ -43,14 +43,6 @@ public class Item {
 		this.price = price;
 	}
 	
-//	public String getItem_category() {
-//		return item_category;
-//	}
-//
-//	public void setItem_category(String item_category) {
-//		this.item_category = item_category;
-//	}
-	
 	
 	@Override
 	public String toString() {
