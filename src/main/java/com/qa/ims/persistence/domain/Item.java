@@ -8,13 +8,12 @@ public class Item {
 	private String item_name;
 	private double price;
 	
-	// constructor without id
+	
     public Item(String item_name,Double price) {
         this.setItem_name (item_name);
         this.setPrice (price);
     }
 
-    // constructor with id
     public Item(Long id, String itemName, Double price) {
         this.id = id;
         this.setItem_name (itemName);
