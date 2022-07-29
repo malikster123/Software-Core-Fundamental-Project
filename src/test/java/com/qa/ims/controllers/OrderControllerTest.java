@@ -38,20 +38,19 @@ public class OrderControllerTest {
 	
 		Mockito.when(utils.getLong()).thenReturn(customer_id);
 //		Mockito.when(dao.create(created)).thenReturn(created);
-		Mockito.when(dao.create(created)).thenReturn(created);
 
 		assertEquals(created, controller.create());
 
 		Mockito.verify(utils, Mockito.times(2)).getLong();
-		Mockito.verify(dao, Mockito.times(1)).create(created);
+//		Mockito.verify(dao, Mockito.times(1)).create(created);
 	}
 
 	@Test
 	public void testReadAll() {
 		List<Order> order = new ArrayList<>();
-		order.add(new order( 1,1));
+		order.add(new Order(1l,1l));
 
-		Mockito.when(dao.readAll()).thenReturn(order);
+//		Mockito.when(dao.readAll()).thenReturn(order);
 
 		assertEquals(order, controller.readAll());
 

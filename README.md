@@ -41,33 +41,148 @@ Once built and opened, the application can be used to manipulate the database. F
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+
+In Eclipse, unit tests and integration tests can be run manually (by right-clicking on them and choosing Run As -> JUnit Test or by pressing Ctrl+F11) or automatically, for example, by deploying the project to a Jenkins server that builds it periodically using Maven. 
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+Unit tests isolate written code to test and determine if it works as intended. here i am passing unit tests for my items class 
 
 ```
-Give an example
+    @Test
+    public void toStringTEST() {
+        Item item = new Item(1L, "PLAYSTATION 5", 400.99);
+        String expected = "Item [id=1, itemName=PS5,  price=400.99]";
+        assertEquals(expected, item.toString());
+    }
+
+    @Test
+    public void firstConstructorTEST() {
+        Item item = new Item("PS5", 400.99);
+        assertEquals("PS5", item.getItem_name());
+        assertEquals(400.99, item.getPrice(), 0.02);
+    }
+
+    @Test
+    public void secondConstructorTEST() {
+        Item item = new Item(1L, "PS5", 500.00);
+        assertEquals(Long.valueOf("1"), item.getId());
+        assertEquals("XBOX", item.getItem_name());
+        assertEquals(500.00, item.getPrice(), 0.02);
+
+    }
+
+
+    @Test
+    public void setIdTEST() {
+        Item item = new Item(1L, "PS5", 400.99);
+        item.setId(2L);
+        assertEquals(Long.valueOf("2"), item.getId());
+
+    }
+
+    @Test
+    public void setItemNameTEST() {
+        Item item = new Item(1L, "PS5", 400.99);
+        item.setItem_name("NINTENDO SWITCH");
+        assertEquals("NINTENDO SWITCH", item.getItem_name());
+    }
+
+    @Test
+    public void setItemCategoryTEST() {
+        Item item = new Item(1L, "PS5", 400.99);
+
+    }
+
+    @Test
+    public void setPriceTEST() {
+        Item item = new Item(1L, "XBOX", 400.99);
+        item.setPrice(5000);
+        assertEquals(5000, item.getPrice(), 0.02);
+
+    }
+
+}
 ```
 
 ### Integration Tests 
-Explain what these tests test, why and how to run them
 
+INTEGRATION TESTING is defined as a type of testing where software modules are integrated logically and tested as a group. A typical software project consists of multiple software modules, coded by different programmers. The purpose of this level of testing is to expose defects in the interaction between these software modules when they are integrated
+
+here below is an example of my integration tests for my item controller
 ```
-Give an example
+
+	@Mock
+	private Utils utils;
+
+	@Mock
+	private ItemDAO dao;
+
+	@InjectMocks
+	private ItemController controller;
+
+	@Test
+	public void testCreate() {
+		final String item_name = "barry";
+		final Double price = 20.20;
+		final Item created = new Item(item_name, price);
+
+		Mockito.when(utils.getString()).thenReturn(item_name);
+		Mockito.when(utils.getDouble()).thenReturn(price);
+		Mockito.when(dao.create(created)).thenReturn(created);
+
+		assertEquals(created, controller.create());
+
+		Mockito.verify(utils, Mockito.times(2)).getString();
+		Mockito.verify(utils, Mockito.times(1)).getDouble();
+		Mockito.verify(dao, Mockito.times(1)).create(created);
+	}
+
+	@Test
+	public void testReadAll() {
+		List<Item> item = new ArrayList<>();
+		item.add(new Item( "jordan", 35.60));
+
+		Mockito.when(dao.readAll()).thenReturn(item);
+
+		assertEquals(item, controller.readAll());
+
+		Mockito.verify(dao, Mockito.times(1)).readAll();
+	}
+
+	@Test
+	public void testUpdate() {
+		Item updated = new Item("bar", 20.21);
+
+		Mockito.when(this.utils.getLong()).thenReturn(1L);
+		Mockito.when(this.utils.getString()).thenReturn(updated.getItem_name());
+		Mockito.when(this.dao.update(updated)).thenReturn(updated);
+
+		assertEquals(updated, this.controller.update());
+
+		Mockito.verify(this.utils, Mockito.times(1)).getLong();
+		Mockito.verify(this.utils, Mockito.times(2)).getString();
+		Mockito.verify(this.dao, Mockito.times(1)).update(updated);
+	}
+
+	@Test
+	public void testDelete() {
+		final long ID = 1L;
+
+		Mockito.when(utils.getLong()).thenReturn(ID);
+		Mockito.when(dao.delete(ID)).thenReturn(1);
+
+		assertEquals(1L, this.controller.delete());
+
+		Mockito.verify(utils, Mockito.times(1)).getLong();
+		Mockito.verify(dao, Mockito.times(1)).delete(ID);
+	}
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
 ```
 
 ## Deployment
 
+mvn deploy
 Add additional notes about how to deploy this on a live system
 
 ## Built With
@@ -81,6 +196,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Subhaan Malik**
 
 ## License
 
