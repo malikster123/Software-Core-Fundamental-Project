@@ -49,7 +49,7 @@ public class OrderControllerTest {
 	@Test
 	public void testReadAll() {
 		List<Order> order = new ArrayList<>();
-		order.add(new order( 1l));
+		order.add(new order( 1,1));
 
 		Mockito.when(dao.readAll()).thenReturn(order);
 

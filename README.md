@@ -1,7 +1,12 @@
-Coverage: 34%
-# Project Title
+Coverage: 59.8%
 
-One Paragraph of project description goes here
+# Jira Link
+[subhaanmalik](https://subhaanmalik.atlassian.net/jira/software/projects/IP/boards/2/roadmap)
+
+# Fundamental Project: Inventory Management System
+
+This is my project for the Inventory Management System. This showcases the skills I have gained over the last 5 weeks with QA Academy.
+This program was written in Java, and the database was created and stored in MySQL, which was then connected and transported into Java. The IMS allows users to perform basic CRUD functionality. After an order is placed, the system provides an Items ID, Quantity, and Total Cost.
 
 ## Getting Started
 
@@ -12,26 +17,27 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them
 
 ```
-Give examples
+- Java 8 JDK
+- Maven
+- MySQL Version 8 or higher
+- Git
+- JUnit
+
 ```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+1. Clone this repository
 
 ```
-Give the example
+ git clone https://github.com/malikster123/Software-Core-Fundamental-Project.git
 ```
+2. inside your terminal run: 
+```cd ims mvn java -jar```
+This will result in an executable .jar file that can be run by the JVM.
+Open the project in your IDE of choice (the project was developed in Eclipse).
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Once built and opened, the application can be used to manipulate the database. First, select a table to perform operations on. Then, select the operation. The application will ask for information and manipulate the database accordingly.
 
 ## Running the tests
 
